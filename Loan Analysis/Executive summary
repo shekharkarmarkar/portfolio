@@ -62,7 +62,7 @@ require(ROCR)
 loans <- read.csv('loans50k.csv')
 ```
 
-There is 'status' variable which shows the result about what is happening or happened to the loan.
+There is 'status' variable which shows the result about what is happening or happened to the loan. 
 
 ```{r, message=FALSE, eval=TRUE, echo=FALSE}
 
