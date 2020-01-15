@@ -10,5 +10,6 @@ I work in various aspects of data science which includes -
 3. Java
 4. Scala
 5. Data visualization
-6. Statistics 
+6. Statistics  
+
 and many more facets or my work.
