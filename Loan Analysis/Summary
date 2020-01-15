@@ -1,4 +1,4 @@
 This project of loan analysis is based on data from a bank. The data gives de-identified information about loan cases. 
 My job was to create analysis to predict loan defaults from available information.
 I used logistic regression analysis to flag cases which has more possibility of default.
-This project showcase use of R, lot of statistical tests and logistic analysis .
+This project showcase use of R, lot of statistical tests and logistic regression analysis .
