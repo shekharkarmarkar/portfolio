@@ -1,0 +1,114 @@
+---
+title: "Stock_trend"
+author: "Shekhar Karmarkar"
+date: "12/6/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Main function to get stock price
+
+```{r}
+# This line imports all functions from another file and make it available for all chunks in this file.
+source('source_trading.R')
+```
+
+```{r}
+# see how stocks are doing
+performance()
+```
+
+```{r}
+# run function for single plot
+  plotStock('dltr')
+```
+
+
+
+```{r}
+# monitor all stocks from monitor excel file, 25 at a time.
+look25(3)
+```
+
+```{r}
+# see all stocks nominal plots from monitor excel sheet, 25 at a time
+lookNominal25(3)
+```
+
+
+
+
+```{r}
+#use this code to test ongoing new stocks. write list of stocks and run.
+#stock_list <- c('aos','ba','dltr','hd','hrb','idxx','irm','pfe','psa','sbux','stz','twtr','txt')
+stock_hold <- read.csv('stocks.csv')
+
+stock_hold_ticker <- stock_hold$Ticker
+
+#plotStocks(stock_hold_ticker)
+plotMultiple(stock_hold_ticker)
+
+
+```
+
+
+```{r}
+# plot single stock nominal with ticker as input
+plotStockNominal('dell')
+```
+
+
+
+```{r}
+# see nominal plots for sos list
+stock_list2 <- c('ba')
+for(i in stock_list){
+  plotStockNominal(i)
+}
+```
+
+
+```{r}
+# Loads tidyquant, lubridate, xts, quantmod, TTR
+
+require(tidyverse)
+require(tidyquant)
+# This is another method to get historical prices from tidyquant package.
+tq_get("DELL", get = "stock.prices", from = " 2019-12-05", to = '2019-12-09')
+```
+
+```{r}
+x1 <- c(1:100)
+plot(x1, type = 'l', sub = 'yy')
+```
+
+
+```{r}
+#list of 500, 25 at a time. enter number 1 to 20. gives index plot of 0 to 100.
+plotBlock(11
+          )
+```
+
+```{r}
+#list of 500, 25 at a time. enter number 1 to 20. gives normal plot of 0 to 100.
+plotNominalBlock(19
+                 )
+```
+
+
+```{r}
+look25(1)
+```
+
+
+```{r}
+#testing for look25
+lookNominal25(3)
+
+```
+
+
+
