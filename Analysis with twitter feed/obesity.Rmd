@@ -1,0 +1,143 @@
+---
+title: "Comparison of preventive and disease related tweets in #Obesity"
+author: "Shekhar Karmarkar"
+date: "12/4/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = F)
+```
+
+```{r}
+# load necessay library
+require(ggformula)
+require(dplyr)
+```
+
+
+## Introduction:
+
+Step one of project is done in python.  
+Twitter is used to collect tweets related to #Obesity.  
+The tweets text is collected in data frame.   
+Duplicate tweets are deleted.  
+It is confirmed that the tweet text contains word 'obesity'.  
+Two lists of words are created -   
+1. The words related to preventive aspect of obesity (aka pre_obesity)   
+2. The words related to disease aspect of obesity (aka post_obesity)  
+
+Each tweet is used to count the total words related to both lists.   
+A tweet can contain words from both lists, and they are counted separately.  
+Dataframe is created and stored as csv file.  
+
+This is second step of project carried out in R.
+
+## Load Data from csv
+
+```{r}
+# load data from csv
+df <- read.csv('obesity.csv')
+str(df)
+```
+# Counting total number of words in both lists
+
+```{r}
+pre = sum(df$pre_count)
+post = sum(df$post_count)
+total = pre + post
+print(paste('Total number of tweets used  are ', nrow(df)))
+print(paste('Total number of words from pre_obesity list are ', pre))
+print(paste('Total number of words from post_obesity list are ', post))
+print(paste('Total number of words from both lists are ', total))
+```
+
+## Proportion test 
+
+The test is used to compare proportion of tweets from both lists.  
+It is one sample proportion test.  
+
+### Hypothesis: 
+**Null Hypothesis:** The number of words from pre_obesity list and post_obesity list are same.    
+$H_0$ : p = 0.5  
+**Alternate Hypothesis:** The number of words from pre_obesity list and post_obesity list are not same.  
+$H_a$ : p $\neq$ 0.5  
+
+### Test :   
+```{r}
+# data:  pre out of total
+# X-squared = 0.90163, df = 1, p-value = 0.3423
+# alternative hypothesis: true p is not equal to 0.5
+# 95 percent confidence interval:
+#  0.4731279 0.5092223
+# sample estimates:
+#         p 
+# 0.4911637 
+prop.test(x = pre, n = total, p = 0.5, alternative = 'two.sided', conf.level = 0.95)
+```
+
+### Conclusion :  
+As p-value is 0.34, we do not reject null hypothesis.  
+With 95 % confidence, we can say that total number of words related preventive aspect of obesity and disease aspect of obesity are same in tweets.
+
+
+
+-------------------------
+
+This is summary of both list counts.  
+It can be seen that summary is almost similar.  
+
+
+```{r}
+summary(df$pre_count)
+summary(df$post_count)
+```
+
+The objects are created for graph creation.
+
+```{r}
+# pre_obesity list grouped by number of words per tweet
+
+obj1 <- df %>% group_by(pre_count) %>% summarise(num = n())
+```
+
+```{r}
+# post_obesity list grouped by number of words per tweet
+obj2 <-  df %>% group_by(post_count) %>% summarise(num = n())
+```
+
+
+
+
+
+```{r}
+# object created to graph total number of words 
+tweets <- c(sum(df$pre_count), sum(df$post_count))
+col <- c('Pre obesity','Post obesity')
+obj3 <- data.frame(col,tweets)
+obj3
+```
+
+
+
+```{r}
+# distribution of words in tweets
+color1 = c('purple','orange','cyan','black','lightblue','red','cyan','orange','pink','grey','red','blue')
+gf_col(data = obj1, gformula = num ~ pre_count, fill = color1) %>% 
+  gf_labs(x='Pre obesity word count', y = 'Number of tweets', title = 'Distribution of pre obesity words in tweets' , subtitle = 'From total 2163 tweets') 
+    
+```
+
+```{r}
+gf_col(data = obj2, gformula = num ~ post_count, fill = color1) %>% 
+  gf_labs(x='Post-obesity word count', y = 'Number of tweets', title = 'Distribution of post- obesity words in tweets' , subtitle = 'From total 2163 tweets')
+```
+
+```{r}
+gf_col(data = obj3, gformula = tweets ~ col, fill = c('cyan','purple')) %>% 
+  gf_labs(x='Type of list', y = 'word count in all tweets', title = 'Number of words from both lists', subtitle = 'From total 2163 tweets')
+ 
+  
+```
+
+
