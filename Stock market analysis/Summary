@@ -1,0 +1,11 @@
+This project is done by me in whole.
+When we invest in stock market with some broker, we get dashboard to show how our portfolio performs.
+But for monitoring stocks in which we have not invested, there is not good tool.
+I have created this tool to monitor any number of stocks on daily or real time basis.
+It shows how stocks perform at one click.
+It shows 25 stocks graphs in one click.
+It shows how stocks are moving
+I have created a tool to show stocks 52 weeks movement related to high and low.
+This all helps to monitor our selected portfolio without paying any fees to broker or any third party.
+It maintains privacy of our stock picking.
+I paired all these tools with excel files to make it very easy to use.
