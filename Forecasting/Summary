@@ -1,0 +1,8 @@
+This project is about forecasting using various models. The data comes from Fargo health group study case. 
+It is data related to hospital group patients for fitness checkup. The data needs to be cleaned, imputed and forecasting used to predict. 
+It helps to create appropriate resources and save money by hospital group. 
+There are various technics used in this project.
+- Data cleaning
+- Data imputation
+- Forecasting by various models like ARIMA or Holt-Winters
+- Comparing forecasting models and doing prediction
