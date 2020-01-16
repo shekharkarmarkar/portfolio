@@ -1,0 +1,5 @@
+This project analyze tweets related to obesity.
+After getting tweets from obesity, they are cleaned, duplicates removed and used for analysis.
+The anaysis is done to determine whether the tweets are more related to preventive aspect of obesity or disease apsect of obesity.
+In first part, tweets are analysed in Python to count the number of words in tweets.
+Then R is used to do statistical analysis and get the results.
